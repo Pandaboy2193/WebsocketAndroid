@@ -3,8 +3,7 @@ package com.example.jasonwu.slicenet_test;
 import android.app.IntentService;
 import android.content.Intent;
 import android.util.Log;
-
-
+import com.google.gson.Gson;
 import io.crossbar.autobahn.websocket.WebSocketConnection;
 import io.crossbar.autobahn.websocket.WebSocketConnectionHandler;
 import io.crossbar.autobahn.websocket.exceptions.WebSocketException;
@@ -65,7 +64,8 @@ public class WebIntentService extends IntentService {
 
                 public void onOpen() {
                     System.out.println("Connection Opened");
-                    mConnection.sendMessage("Echo with Autobahn");
+                    Gson gson = new Gson();
+                    mConnection.sendMessage(gson.toJson("\"type\": \"init\", \"mode\": \"identify\""));
 //                    mConnection.sendMessage(image);
                 }
 
